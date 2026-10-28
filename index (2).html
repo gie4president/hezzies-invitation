@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffc9da">
+<title>For Hezzie ♡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎀%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   STYLE — pink coquette + red accents
+   ========================================================= */
+:root{
+  --pink-100:#fff0f4;
+  --pink-200:#ffdbe6;
+  --pink-300:#ffbfd2;
+  --pink-400:#ff9db9;
+  --red:#d6123b;
+  --red-bright:#ff4d6d;
+  --red-dark:#a30d2d;
+  --maroon:#5a1f2d;
+  --cream:#fffaf4;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Quicksand', ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{height:100%;margin:0}
+body{
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.5;
+  color:var(--maroon);
+  background-color:#ffc9da;
+  background-image:
+    linear-gradient(rgba(255,255,255,.28) 50%, transparent 50%),
+    linear-gradient(90deg, rgba(255,255,255,.28) 50%, transparent 50%),
+    linear-gradient(160deg,#ffe3ec 0%,#ffc9da 60%,#ffd9e4 100%);
+  background-size:30px 30px, 30px 30px, 100% 100%;
+  overflow:hidden;
+  -webkit-text-size-adjust:100%;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* floating background hearts */
+#hearts{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:0}
+#hearts span{
+  position:absolute;bottom:-60px;
+  animation:rise linear infinite;
+  will-change:transform;
+}
+@keyframes rise{
+  0%{transform:translate3d(0,0,0) rotate(0deg);opacity:0}
+  10%{opacity:.55}
+  90%{opacity:.55}
+  100%{transform:translate3d(var(--sway,30px),-125vh,0) rotate(40deg);opacity:0}
+}
+
+/* screens */
+.screen{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  z-index:1;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;
+  transform:translateY(14px) scale(.98);
+  transition:opacity .5s ease, transform .5s ease, visibility 0s linear .5s;
+}
+.screen.active{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .5s ease .15s, transform .5s ease .15s, visibility 0s;
+}
+.wrap{
+  min-height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;
+  padding:max(18px, env(safe-area-inset-top)) 16px max(26px, env(safe-area-inset-bottom));
+}
+
+/* typography */
+h1,h2{font-family:var(--serif);font-style:italic;font-weight:900;color:var(--red);margin:0;line-height:1.15;text-shadow:0 2px 0 #fff}
+h1{font-size:clamp(30px,8.5vw,46px)}
+h2{font-size:clamp(24px,6.6vw,34px)}
+.sub{margin:0;font-weight:600;color:var(--maroon);max-width:420px}
+
+/* cards */
+.card{
+  position:relative;
+  width:100%;max-width:440px;
+  background:var(--cream);
+  border:3px solid #fff;
+  border-radius:30px;
+  padding:40px 22px 26px;
+  margin-top:26px;
+  box-shadow:0 14px 34px rgba(214,18,59,.2);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.card::before{ /* stitched coquette border */
+  content:"";position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:2px dashed var(--pink-300);border-radius:23px;pointer-events:none;
+}
+.card > *{position:relative}
+.bow{position:absolute !important;top:-28px;left:50%;width:84px;height:48px;margin-left:-42px;filter:drop-shadow(0 3px 3px rgba(163,13,45,.25))}
+.lead{font-weight:700;margin:0;font-size:1.05rem}
+.wish{display:flex;flex-direction:column;gap:10px;text-align:left;font-size:1rem;margin:2px 0 4px}
+.wish p{margin:0;opacity:0;transform:translateY(8px)}
+.wish.in p{animation:fadeUp .6s ease forwards;animation-delay:calc(var(--i) * .35s + .9s)}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* buttons */
+.btn{
+  -webkit-appearance:none;appearance:none;border:0;cursor:pointer;
+  font:inherit;font-weight:700;letter-spacing:.05em;color:#fff;
+  background:linear-gradient(180deg,var(--red-bright),var(--red));
+  padding:14px 26px;min-height:52px;border-radius:999px;
+  box-shadow:0 6px 0 var(--red-dark),0 12px 22px rgba(214,18,59,.3);
+  transition:transform .12s ease, box-shadow .12s ease;
+  touch-action:manipulation;
+  max-width:100%;
+}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--red-dark),0 4px 10px rgba(214,18,59,.3)}
+.btn.pulse{animation:glow 1.8s ease-in-out infinite}
+.btn.ghost{background:#fff;color:var(--red);box-shadow:0 5px 0 var(--pink-300),0 10px 18px rgba(214,18,59,.15)}
+.btn.ghost:active{box-shadow:0 1px 0 var(--pink-300)}
+.btn.small{padding:8px 16px;min-height:40px;font-size:.85rem;box-shadow:0 4px 0 var(--pink-300),0 8px 14px rgba(214,18,59,.12)}
+@keyframes glow{
+  0%,100%{box-shadow:0 6px 0 var(--red-dark),0 12px 22px rgba(214,18,59,.3)}
+  50%{box-shadow:0 6px 0 var(--red-dark),0 12px 30px rgba(214,18,59,.55),0 0 0 8px rgba(255,77,109,.18)}
+}
+
+/* ---------- GAME ---------- */
+.hud{
+  background:#fff;color:var(--red);font-weight:700;font-size:.9rem;
+  padding:5px 16px;border-radius:999px;border:2px solid var(--pink-300);
+  box-shadow:0 3px 8px rgba(214,18,59,.12);
+}
+.bubble,.caught-box{
+  width:100%;max-width:440px;min-height:84px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+}
+.bubble{
+  position:relative;background:#fff;border:2px solid var(--pink-300);border-radius:20px;
+  padding:10px 16px;min-height:56px;font-weight:700;color:var(--red-dark);
+}
+.bubble::after{
+  content:"";position:absolute;bottom:-9px;left:50%;margin-left:-9px;width:16px;height:16px;
+  background:#fff;border-right:2px solid var(--pink-300);border-bottom:2px solid var(--pink-300);
+  transform:rotate(45deg);
+}
+.bubble.pop{animation:popIn .35s ease}
+@keyframes popIn{0%{transform:scale(.85)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.caught-text{margin:0;font-family:var(--serif);font-style:italic;font-weight:900;color:var(--red);font-size:clamp(20px,5.6vw,26px);line-height:1.2;animation:popIn .5s ease}
+.arena{
+  position:relative;overflow:hidden;
+  width:100%;max-width:440px;
+  height:clamp(250px,44vh,400px);
+  background:rgba(255,255,255,.6);
+  border:3px dashed var(--pink-400);border-radius:28px;
+  box-shadow:inset 0 0 24px rgba(255,157,185,.35);
+  margin-top:6px;
+}
+.arena .deco{position:absolute;pointer-events:none;opacity:.35;font-size:22px;color:var(--red)}
+.winston{
+  position:absolute;top:0;left:0;
+  width:92px;height:98px;padding:0;margin:0;border:0;background:none;
+  cursor:pointer;
+  transform:translate(0,0);
+  transition:transform .26s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+  outline:none;
+}
+.winston:focus-visible{outline:3px solid var(--red);border-radius:18px}
+.winston.tired{transition-duration:1s;transition-timing-function:ease-in-out}
+.winston-inner{width:100%;height:100%;transform-origin:50% 92%;animation:bob 2.4s ease-in-out infinite}
+.winston-inner svg{width:100%;height:100%;display:block;overflow:visible;pointer-events:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px) scale(1.02,.98)}}
+@keyframes dash{
+  0%{transform:scale(1.2,.75) rotate(-12deg)}
+  40%{transform:scale(.88,1.2) translateY(-12px) rotate(9deg)}
+  70%{transform:scale(1.06,.95) rotate(-3deg)}
+  100%{transform:none}
+}
+@keyframes pant{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.95)}}
+@keyframes flop{
+  0%{transform:none}
+  35%{transform:rotate(-14deg) translateY(-6px)}
+  100%{transform:rotate(-5deg) scale(1.03,.93)}
+}
+.winston.tired .winston-inner{animation:pant 1.1s ease-in-out infinite}
+.winston.surrender{cursor:default}
+.winston.surrender .winston-inner{animation:flop .8s ease-out forwards}
+.winston.surrender::after{content:"🏳️";position:absolute;top:-10px;right:-8px;font-size:26px;animation:popIn .5s ease .4s both}
+.winston .winston-inner.run{animation:dash .4s ease-out}
+
+.spark{position:fixed;pointer-events:none;z-index:50;line-height:1;font-weight:700}
+
+/* ---------- BIRTHDAY ---------- */
+.cake{width:150px;height:auto;margin-bottom:-4px}
+.cake .flame{transform-origin:center bottom;animation:flicker .6s ease-in-out infinite alternate}
+@keyframes flicker{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(.9,1.12) rotate(4deg)}}
+.winston-slot{width:120px}
+.winston-slot svg{width:100%;height:auto;display:block;overflow:visible}
+.caption{margin:-4px 0 4px;font-size:.9rem;font-weight:700;color:var(--red-dark)}
+
+/* ---------- PASSWORD ---------- */
+.lock{font-size:56px;line-height:1;transition:transform .3s}
+.lock.open{animation:unlock .8s ease both}
+@keyframes unlock{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.35) rotate(-14deg)}60%{transform:scale(1.2) rotate(10deg)}100%{transform:scale(1.15) rotate(0)}}
+.pw-form{width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:4px}
+.field{
+  width:100%;max-width:300px;
+  font:inherit;font-size:18px;font-weight:700;color:var(--maroon);
+  text-align:center;letter-spacing:.18em;
+  padding:14px 18px;min-height:54px;
+  border:2px solid var(--pink-300);border-radius:999px;background:#fff;outline:none;
+  -webkit-appearance:none;appearance:none;
+}
+.field::placeholder{letter-spacing:.02em;color:#c79aa6;font-weight:600}
+.field:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(255,77,109,.2)}
+.msg{min-height:1.6em;font-weight:700;margin:0;max-width:330px}
+.msg.bad{color:var(--red)}
+.msg.good{color:#b3123b}
+.hint-text{margin:0;font-size:.88rem;color:var(--red-dark);font-weight:600}
+.card.shake{animation:shake .45s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+
+/* ---------- INVITATION (digital) ---------- */
+.card.wide{max-width:520px}
+
+/* envelope */
+.env-stage{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:10px}
+.env-stage.gone{animation:envOut .55s ease forwards}
+@keyframes envOut{to{opacity:0;transform:translateY(24px) scale(.9)}}
+.env{
+  position:relative;width:min(300px,82vw);height:min(200px,55vw);
+  cursor:pointer;perspective:900px;
+  animation:envBob 2.6s ease-in-out infinite;
+  outline:none;
+}
+.env:focus-visible{outline:3px solid var(--red);outline-offset:6px;border-radius:12px}
+@keyframes envBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+.env.open{animation:none}
+.env > div{position:absolute;left:0;right:0}
+.env-back{top:0;bottom:0;background:#ff9db9;border-radius:12px;box-shadow:0 14px 28px rgba(214,18,59,.28)}
+.env-letter{
+  top:10px;bottom:10px;left:10px !important;right:10px !important;background:#fff;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-style:italic;font-weight:700;color:var(--red);font-size:1.1rem;
+}
+.env-front{
+  top:0;bottom:0;background:#ffb6c9;border-radius:12px;
+  clip-path:polygon(0 100%,0 28%,50% 66%,100% 28%,100% 100%);
+}
+.env-flap{
+  top:0;height:66%;background:#ff7a9c;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:50% 0;transition:transform .7s ease, background .7s ease;
+  border-radius:12px 12px 0 0;z-index:3;
+}
+.env.open .env-flap{transform:rotateX(180deg);background:#ff9db9;z-index:0}
+.env-seal{
+  left:50% !important;right:auto !important;top:66%;width:48px;height:48px;margin:-24px 0 0 -24px;
+  border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff4d6d,#a30d2d);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;
+  box-shadow:0 4px 8px rgba(90,31,45,.35);z-index:4;transition:opacity .3s, transform .5s;
+}
+.env.open .env-seal{opacity:0;transform:scale(.4)}
+.env-tip{margin:0;font-weight:700;color:var(--red-dark);font-size:.95rem;animation:glowText 1.8s ease-in-out infinite}
+@keyframes glowText{0%,100%{opacity:.6}50%{opacity:1}}
+
+.invite-card{animation:cardIn .8s cubic-bezier(.22,1,.36,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.94)}to{opacity:1;transform:none}}
+.eyebrow{margin:0;font-weight:700;letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--red-dark)}
+.invite-text{margin:0;font-weight:600;max-width:400px}
+
+/* vinyl record */
+.vinyl-wrap{position:relative;width:210px;height:190px;margin:2px 0}
+.disc{
+  position:absolute;left:0;top:10px;width:170px;height:170px;border-radius:50%;
+  background:
+    radial-gradient(circle,transparent 0 30%,rgba(255,255,255,.07) 30.5% 31%,transparent 31.5% 100%),
+    repeating-radial-gradient(circle,#1b1013 0 2px,#2a171c 2px 3.5px),
+    #161012;
+  box-shadow:0 10px 22px rgba(90,31,45,.4),inset 0 0 0 3px #2d1a1f;
+}
+.disc::before{ /* light sheen */
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 20deg,transparent 0 10%,rgba(255,255,255,.18) 16%,transparent 24% 60%,rgba(255,255,255,.14) 66%,transparent 74% 100%);
+}
+.disc-label{
+  position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;
+  background:radial-gradient(circle,#fff 0 6%,#ff9db9 7% 100%);
+  border:3px solid #ffdbe6;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:16px;line-height:1;
+}
+.disc-label span{position:relative;top:-14px;font-size:14px}
+.disc.spin{animation:spin 3.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.arm{
+  position:absolute;right:26px;top:0;width:8px;height:112px;border-radius:6px;
+  background:linear-gradient(90deg,#fff,#ffdbe6);box-shadow:2px 3px 6px rgba(90,31,45,.3);
+  transform-origin:50% 8px;transform:rotate(-24deg);transition:transform 1s ease;
+}
+.arm::before{content:"";position:absolute;top:-8px;left:-6px;width:20px;height:20px;border-radius:50%;background:var(--red);box-shadow:0 2px 4px rgba(90,31,45,.4)}
+.arm::after{content:"";position:absolute;bottom:-8px;left:-4px;width:16px;height:14px;border-radius:4px;background:var(--red-dark);transform:rotate(-8deg)}
+.arm.on{transform:rotate(16deg)}
+.notes{position:absolute;right:0;top:50px;width:40px;height:100px;pointer-events:none}
+.notes span{position:absolute;left:0;bottom:0;font-size:18px;color:var(--red);opacity:0}
+.vinyl-wrap.playing .notes span{animation:noteUp 3s ease-in infinite}
+.notes span:nth-child(2){animation-delay:1s !important;left:14px}
+.notes span:nth-child(3){animation-delay:2s !important;left:-4px}
+@keyframes noteUp{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-70px) rotate(25deg);opacity:0}}
+.song-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.song-title{font-weight:700;font-size:.9rem;color:var(--red-dark)}
+.song-warn{margin:0;font-size:.8rem;font-weight:700;color:var(--red)}
+
+/* details */
+.details{
+  width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;
+}
+.detail{
+  background:#fff;border:2px solid var(--pink-300);border-radius:16px;padding:9px 12px;
+}
+.detail.full{grid-column:1 / -1}
+.detail small{display:block;font-weight:700;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-dark)}
+.detail b{display:block;font-weight:700;color:var(--maroon);font-size:.98rem;line-height:1.3}
+
+/* countdown */
+.count-wrap{width:100%}
+.count-label{margin:0 0 8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;color:var(--red-dark)}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{
+  background:linear-gradient(180deg,var(--red-bright),var(--red));color:#fff;border-radius:16px;padding:10px 2px 8px;
+  box-shadow:0 5px 0 var(--red-dark),0 10px 16px rgba(214,18,59,.25);
+}
+.tile .n{display:block;font-family:var(--serif);font-weight:900;font-size:clamp(24px,7.5vw,34px);line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{display:block;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.tile .n.tick{animation:tick .35s ease}
+@keyframes tick{0%{transform:translateY(-6px);opacity:.4}100%{transform:none;opacity:1}}
+.count-done{margin:0;font-family:var(--serif);font-style:italic;font-weight:900;color:var(--red);font-size:1.4rem}
+
+/* rsvp */
+.rsvp{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+.rsvp-q{margin:0;font-family:var(--serif);font-style:italic;font-weight:900;font-size:1.25rem;color:var(--red)}
+.rsvp-btns{position:relative;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;min-height:70px;width:100%}
+#btn-no{transition:transform .25s cubic-bezier(.22,1,.36,1)}
+
+.tiny{margin:0;font-size:.85rem;font-weight:600;color:var(--red-dark)}
+.closing{display:flex;flex-direction:column;align-items:center;gap:10px;animation:popIn .6s ease both}
+.closing p.final{margin:0;font-family:var(--serif);font-style:italic;font-weight:700;font-size:1.2rem;line-height:1.45;color:var(--red)}
+.zzz{height:22px;font-weight:700;color:var(--red);display:flex;gap:4px;justify-content:center}
+.zzz span{display:inline-block;animation:zfloat 2.4s ease-in-out infinite}
+.zzz span:nth-child(2){animation-delay:.5s;font-size:1.15em}
+.zzz span:nth-child(3){animation-delay:1s;font-size:1.3em}
+@keyframes zfloat{0%{transform:translateY(6px);opacity:0}40%{opacity:1}100%{transform:translateY(-8px);opacity:0}}
+
+/* sound toggle */
+#sound-btn{
+  position:fixed;top:max(10px, env(safe-area-inset-top));right:10px;z-index:60;
+  width:44px;height:44px;border-radius:50%;border:2px solid var(--pink-300);
+  background:#fff;font-size:20px;line-height:1;cursor:pointer;
+  box-shadow:0 3px 8px rgba(214,18,59,.18);touch-action:manipulation;
+}
+
+/* curtains */
+.curtain{
+  position:fixed;top:0;bottom:0;width:50%;z-index:70;display:none;pointer-events:none;
+  background:repeating-linear-gradient(90deg,#ff9db9 0 20px,#ffb6c9 20px 40px);
+}
+.curtain.l{left:0;border-right:6px solid var(--red)}
+.curtain.r{right:0;border-left:6px solid var(--red)}
+
+/* small phones */
+@media (max-width:380px){
+  body{font-size:16px}
+  .winston{width:80px;height:86px}
+  .card{padding:38px 16px 22px}
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001s !important;
+    animation-delay:0s !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001s !important;
+    transition-delay:0s !important;
+  }
+  #hearts{display:none}
+}
+</style>
+</head>
+
+<body>
+<noscript>
+  <p style="position:relative;z-index:5;padding:30px;text-align:center;font-family:sans-serif">Please turn on JavaScript to open this little surprise ♡</p>
+</noscript>
+
+<div id="hearts" aria-hidden="true"></div>
+<div class="curtain l" id="curtain-l" aria-hidden="true"></div>
+<div class="curtain r" id="curtain-r" aria-hidden="true"></div>
+
+<!-- the song (file name comes from CONFIG.songFile) -->
+<audio id="song" loop preload="auto"></audio>
+
+<button id="sound-btn" type="button" aria-label="Turn sound on" aria-pressed="false">🔇</button>
+
+<!-- ================= SCREEN 1: CATCH WINSTON ================= -->
+<section class="screen active" id="s-game" aria-label="Catch Winston">
+  <div class="wrap">
+    <h1>CATCH WINSTON! 🐈‍⬛</h1>
+    <p class="sub">Someone's feeling a little too mischievous today…</p>
+    <div class="hud" id="counter">Escape attempts: 0</div>
+
+    <div class="bubble" id="bubble" aria-live="polite">Psst… tap me if you can 😼</div>
+    <div class="caught-box" id="caught-box" hidden>
+      <p class="caught-text">OKAY, OKAY! YOU GOT ME, <span class="js-name-upper">HEZZIE</span>! 😾</p>
+      <button class="btn pulse" id="btn-claim" type="button">CLAIM YOUR PRIZE ♡</button>
+    </div>
+
+    <div class="arena" id="arena">
+      <span class="deco" style="left:8%;top:10%">♡</span>
+      <span class="deco" style="right:10%;top:16%">✦</span>
+      <span class="deco" style="left:14%;bottom:12%">✿</span>
+      <span class="deco" style="right:12%;bottom:10%">♡</span>
+      <button class="winston" id="winston" type="button" aria-label="Winston the tuxedo cat. Try to catch him!">
+        <div class="winston-inner" id="winston-inner"></div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCREEN 2: BIRTHDAY ================= -->
+<section class="screen" id="s-bday" aria-label="Birthday surprise">
+  <div class="wrap">
+    <div class="card">
+      <svg class="bow" viewBox="0 0 100 56" aria-hidden="true"></svg>
+
+      <svg class="cake" viewBox="0 0 120 100" aria-hidden="true">
+        <ellipse cx="60" cy="90" rx="52" ry="7" fill="#fff" stroke="#ffbfd2" stroke-width="2"/>
+        <rect x="20" y="56" width="80" height="32" rx="9" fill="#ff9db9"/>
+        <rect x="30" y="34" width="60" height="26" rx="9" fill="#ffc2d4"/>
+        <path d="M20 62 Q20 56 26 56 H94 Q100 56 100 62 V66 Q95 76 90 66 Q85 76 80 66 Q75 76 70 66 Q65 76 60 66 Q55 76 50 66 Q45 76 40 66 Q35 76 30 66 Q25 76 20 66 Z" fill="#fff"/>
+        <path d="M30 40 Q30 34 36 34 H84 Q90 34 90 40 V44 Q85 54 80 44 Q75 54 70 44 Q65 54 60 44 Q55 54 50 44 Q45 54 40 44 Q35 54 30 44 Z" fill="#fff"/>
+        <rect x="42" y="18" width="4" height="16" rx="2" fill="#d6123b"/>
+        <rect x="58" y="18" width="4" height="16" rx="2" fill="#ff9db9"/>
+        <rect x="74" y="18" width="4" height="16" rx="2" fill="#d6123b"/>
+        <ellipse class="flame" cx="44" cy="13" rx="3" ry="5" fill="#ffcf3a"/>
+        <ellipse class="flame" cx="60" cy="13" rx="3" ry="5" fill="#ffcf3a"/>
+        <ellipse class="flame" cx="76" cy="13" rx="3" ry="5" fill="#ffcf3a"/>
+        <circle cx="30" cy="80" r="4" fill="#d6123b"/><circle cx="50" cy="82" r="4" fill="#d6123b"/>
+        <circle cx="70" cy="82" r="4" fill="#d6123b"/><circle cx="90" cy="80" r="4" fill="#d6123b"/>
+      </svg>
+
+      <h2>HAPPY BIRTHDAY, <span class="js-name-upper">HEZZIE</span>! 🎂</h2>
+      <p class="lead">Another year older, but you'll never be too old to chase a little cat around.</p>
+
+      <div class="wish" id="wish"></div>
+
+      <div class="winston-slot" id="w-bday"></div>
+      <p class="caption">Winston: “Mission accomplished.” 😼</p>
+
+      <button class="btn pulse" id="btn-more" type="button">THERE'S ONE MORE THING…</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCREEN 3: PASSWORD ================= -->
+<section class="screen" id="s-pass" aria-label="Password">
+  <div class="wrap">
+    <div class="card" id="pass-card">
+      <svg class="bow" viewBox="0 0 100 56" aria-hidden="true"></svg>
+      <div class="lock" id="lock" aria-hidden="true">🔒</div>
+      <h2>Psst… one last secret! 💌</h2>
+      <p class="sub">Only <span class="js-name">Hezzie</span> can unlock this little surprise.</p>
+      <form class="pw-form" id="pw-form" autocomplete="off">
+        <input class="field" id="pw-input" name="secret-word" type="password"
+               placeholder="secret password" autocomplete="off" autocapitalize="none"
+               autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Secret password">
+        <button class="btn" id="btn-unlock" type="submit">UNLOCK ♡</button>
+      </form>
+      <p class="msg" id="pw-msg" aria-live="polite"></p>
+      <p class="hint-text" id="pw-hint" hidden></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCREEN 4: DIGITAL INVITATION ================= -->
+<section class="screen" id="s-invite" aria-label="Invitation">
+  <div class="wrap">
+
+    <!-- step 1: the envelope -->
+    <div class="env-stage" id="env-stage">
+      <div class="env" id="env" role="button" tabindex="0" aria-label="Tap to open your invitation">
+        <div class="env-back"></div>
+        <div class="env-letter">For <span class="js-name">Hezzie</span> ♡</div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <div class="env-seal">♥</div>
+      </div>
+      <p class="env-tip">Tap the envelope to open it 💌</p>
+    </div>
+
+    <!-- step 2: the invitation card -->
+    <div class="card wide invite-card" id="invite-card" hidden>
+      <svg class="bow" viewBox="0 0 100 56" aria-hidden="true"></svg>
+
+      <p class="eyebrow" id="inv-eyebrow"></p>
+      <h2 id="inv-title"></h2>
+
+      <div class="vinyl-wrap" id="vinyl-wrap">
+        <div class="disc" id="disc"><div class="disc-label"><span>♥</span></div></div>
+        <div class="arm" id="arm"></div>
+        <div class="notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♪</span></div>
+      </div>
+      <div class="song-row">
+        <span class="song-title" id="song-title"></span>
+        <button class="btn ghost small" id="btn-music" type="button">⏸ PAUSE</button>
+      </div>
+      <p class="song-warn" id="song-warn" hidden></p>
+
+      <p class="invite-text" id="inv-text"></p>
+
+      <div class="details" id="inv-details"></div>
+
+      <div class="count-wrap">
+        <p class="count-label" id="count-label">Counting down to our day</p>
+        <div class="count" id="count">
+          <div class="tile"><span class="n" id="c-d">0</span><span class="l">days</span></div>
+          <div class="tile"><span class="n" id="c-h">0</span><span class="l">hours</span></div>
+          <div class="tile"><span class="n" id="c-m">0</span><span class="l">mins</span></div>
+          <div class="tile"><span class="n" id="c-s">0</span><span class="l">secs</span></div>
+        </div>
+        <p class="count-done" id="count-done" hidden></p>
+      </div>
+
+      <div class="rsvp" id="rsvp">
+        <p class="rsvp-q" id="rsvp-q"></p>
+        <div class="rsvp-btns" id="rsvp-btns">
+          <button class="btn pulse" id="btn-yes" type="button"></button>
+          <button class="btn ghost" id="btn-no" type="button"></button>
+        </div>
+      </div>
+
+      <div class="closing" id="closing" hidden>
+        <p class="final" id="closing-text"></p>
+        <div class="winston-slot" id="w-final"></div>
+        <div class="zzz" aria-hidden="true"><span>z</span><span>z</span><span>Z</span></div>
+        <button class="btn ghost" id="btn-restart" type="button">PLAY AGAIN 🐾</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* =========================================================
+   ⚙️ CONFIG — EDIT THE THINGS IN THIS BLOCK ONLY ♡
+   (everything below this block can stay untouched)
+   ========================================================= */
+const CONFIG = {
+
+  // 👤 Name of the birthday girl. Shows up in titles and messages.
+  recipientName: "Hezzie",
+
+  // 🔑 THE PASSWORD. Change the text between the quotes to change it.
+  // It is not case-sensitive ("Winston" and "winston" both work).
+  // Note: this is only a cute little gate, NOT real security —
+  // anyone who views the page source can find it.
+  password: "winston",
+
+  // 💡 Hint shown after 2 wrong tries. Put "" (empty) to turn the hint off.
+  passwordHint: "Hint: the name of a certain sneaky cat 🐾",
+
+  // 😼 Message shown when the password is wrong.
+  wrongPasswordMessage: "Nope! Winston says that's not the secret password. 😼",
+
+  // 🐈‍⬛ Winston settings
+  escapesBeforeTired: 5,   // how many times he escapes before he gets tired and can be caught
+  winstonIntro: "Psst… tap me if you can 😼",
+  winstonTiredLine: "*pant pant* …okay, I'm getting tired 😮‍💨",
+  // {NAME} is replaced by the recipient's name in CAPITALS.
+  winstonTaunts: [
+    "HEHE, MISSED ME!",
+    "TOO SLOW, {NAME}!",
+    "NICE TRY, HUMAN.",
+    "YOU CAN'T CATCH ME!",
+    "BRO, YOU'RE STILL TRYING?!"
+  ],
+
+  // 🎂 Birthday message (page 2). One line of text = one paragraph.
+  birthdayParagraphs: [
+    "Hey, you. Happy birthday!",
+    "I'm not great at big speeches, so I made you a website instead. Yes, the one where your cat makes fun of you. Winston did most of the work, I just did the typing.",
+    "Thank you for being you: for the random laughs, for putting up with me on my bad days, for being the person I always want to tell everything to. I hope today is full of cake, people who love you, and zero stress.",
+    "I'm really glad you were born. And I'm really glad you're mine."
+  ],
+
+  /* ---------------------------------------------------------
+     💌 DIGITAL INVITATION (page 4)
+     --------------------------------------------------------- */
+
+  // 🎵 The song that plays (and spins on the vinyl) after she unlocks.
+  // Upload an audio file with exactly this name to the SAME GitHub
+  // repository as index.html (mp3 works best).
+  songFile: "song.mp3",
+  songTitle: "♪ Now playing: our song",
+
+  // 📅 Date of the event (used by the countdown).
+  // Format: YYYY-MM-DDTHH:MM:00+07:00  (+07:00 = Jakarta time)
+  // Change the time part (19:00) once you know the real time.
+  eventDate: "2026-11-07T19:00:00+07:00",
+  countdownLabel: "Counting down to our day",
+  countdownDone: "It's today, Hezzie!! 🎉",
+
+  // ✍️ Invitation text (placeholder, rewrite it however you like)
+  inviteEyebrow: "A little invitation",
+  inviteTitle: "You're invited, Hezzie ♡",
+  inviteText: "One website was definitely not enough, so I'm taking you on a birthday date. Dress cute, bring your appetite, and leave the stress at home. Winston will be watching from the couch, judging us both.",
+
+  // 📍 Details shown on the card. Add, remove or edit rows freely.
+  // full:true makes a row span the whole width.
+  inviteDetails: [
+    { label: "When", value: "Saturday, 7 November 2026", full: true },
+    { label: "Time", value: "7:00 PM" },
+    { label: "Where", value: "It's a surprise ♡" },
+    { label: "Dress code", value: "Pink or red, if you feel like it 🎀", full: true }
+  ],
+
+  // 🙋 RSVP
+  rsvpQuestion: "So… will you come?",
+  rsvpYes: "YES, OF COURSE ♡",
+  rsvpNo: "Hmm, let me think…",
+  rsvpNoDodges: 4,   // how many times the "no" button runs away before it gives in
+  rsvpNoDodgeLines: ["Too slow!", "Nope, try again", "Can't catch me 😼", "Really?"],
+  rsvpNoGivesIn: "Okay fine, yes ♡",
+
+  // 💌 Final message (shown after she says yes)
+  closingMessage: "Happy birthday, my favorite person. I hope this year brings you so many reasons to smile. Love you always. ♡"
+};
+/* ======================= END OF CONFIG ======================= */
+
+
+(function () {
+  'use strict';
+
+  /* ---------- helpers ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var pick = function (arr) { return arr[Math.floor(Math.random() * arr.length)]; };
+  var REDUCE = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var NAME = CONFIG.recipientName;
+  var NAME_UP = NAME.toUpperCase();
+
+  /* fill in the name everywhere */
+  Array.prototype.forEach.call(document.querySelectorAll('.js-name-upper'), function (el) { el.textContent = NAME_UP; });
+  Array.prototype.forEach.call(document.querySelectorAll('.js-name'), function (el) { el.textContent = NAME; });
+
+  /* ---------- Winston the tuxedo cat (inline SVG) ---------- */
+  function winstonSVG(mood) {
+    var face = '';
+    var eyes = '<ellipse cx="46" cy="50" rx="7.5" ry="8.5" fill="#ffe27a"/><ellipse cx="74" cy="50" rx="7.5" ry="8.5" fill="#ffe27a"/>' +
+               '<ellipse cx="47.5" cy="51" rx="2.2" ry="6" fill="#1a0f12"/><ellipse cx="72.5" cy="51" rx="2.2" ry="6" fill="#1a0f12"/>';
+    if (mood === 'tired') {
+      face = eyes +
+        '<path d="M36 38 L56 38 L56 52 L36 52 Z" fill="#161012"/><path d="M64 38 L84 38 L84 52 L64 52 Z" fill="#161012"/>' +
+        '<ellipse cx="60" cy="70" rx="4" ry="4.6" fill="#7a1f33"/><ellipse cx="60" cy="72.6" rx="2.6" ry="2" fill="#ff8fa8"/>' +
+        '<path d="M97 36 Q102 46 97 50 Q92 46 97 36 Z" fill="#8fd3ff"/>';
+    } else if (mood === 'caught') {
+      face =
+        '<path d="M37 41 L52 50 L37 59" fill="none" stroke="#ffe27a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<path d="M83 41 L68 50 L83 59" fill="none" stroke="#ffe27a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<path d="M51 71 Q60 63 69 71" fill="none" stroke="#5a1f2d" stroke-width="2.4" stroke-linecap="round"/>';
+    } else if (mood === 'sleepy') {
+      face =
+        '<path d="M38 52 Q46 59 54 52" fill="none" stroke="#ffe27a" stroke-width="3.2" stroke-linecap="round"/>' +
+        '<path d="M66 52 Q74 59 82 52" fill="none" stroke="#ffe27a" stroke-width="3.2" stroke-linecap="round"/>' +
+        '<path d="M54 67 Q60 72 66 67" fill="none" stroke="#5a1f2d" stroke-width="2.2" stroke-linecap="round"/>';
+    } else { /* smug / mischievous */
+      face = eyes +
+        '<path d="M36 40 L56 40 L56 49 L36 44 Z" fill="#161012"/><path d="M64 40 L84 40 L84 44 L64 49 Z" fill="#161012"/>' +
+        '<path d="M60 66 Q55 71 50 67" fill="none" stroke="#5a1f2d" stroke-width="2.2" stroke-linecap="round"/>' +
+        '<path d="M60 66 Q65 72 72 63" fill="none" stroke="#5a1f2d" stroke-width="2.2" stroke-linecap="round"/>';
+    }
+    return '<svg viewBox="0 0 120 126" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Winston the tuxedo cat">' +
+      /* tail + shadow */
+      '<path d="M90 100 C112 100 120 78 108 66" fill="none" stroke="#161012" stroke-width="10" stroke-linecap="round"/>' +
+      '<ellipse cx="60" cy="122" rx="30" ry="4" fill="rgba(90,31,45,.14)"/>' +
+      /* body, chest, paws */
+      '<ellipse cx="60" cy="92" rx="30" ry="28" fill="#161012"/>' +
+      '<ellipse cx="60" cy="98" rx="15" ry="19" fill="#fff"/>' +
+      '<ellipse cx="46" cy="115" rx="9.5" ry="6" fill="#fff"/><ellipse cx="74" cy="115" rx="9.5" ry="6" fill="#fff"/>' +
+      /* red collar + bell */
+      '<path d="M38 78 Q60 92 82 78" fill="none" stroke="#d6123b" stroke-width="6" stroke-linecap="round"/>' +
+      '<circle cx="60" cy="87" r="4.6" fill="#ffcf3a" stroke="#e0a800" stroke-width="1"/>' +
+      /* head + ears */
+      '<polygon points="30,38 33,9 55,27" fill="#161012"/><polygon points="90,38 87,9 65,27" fill="#161012"/>' +
+      '<polygon points="35,32 37,18 47,27" fill="#ff9db9"/><polygon points="85,32 83,18 73,27" fill="#ff9db9"/>' +
+      '<ellipse cx="60" cy="50" rx="34" ry="28" fill="#161012"/>' +
+      /* white blaze + muzzle */
+      '<path d="M60 27 C66 38 68 48 71 58 L49 58 C52 48 54 38 60 27 Z" fill="#fff"/>' +
+      '<ellipse cx="60" cy="64" rx="17" ry="13" fill="#fff"/>' +
+      '<ellipse cx="33" cy="62" rx="6" ry="4" fill="#ff7a9c" opacity=".55"/><ellipse cx="87" cy="62" rx="6" ry="4" fill="#ff7a9c" opacity=".55"/>' +
+      face +
+      '<polygon points="56,59 64,59 60,64.5" fill="#ff7a9c"/>' +
+      '<g stroke="#e3a1b1" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M42 64 L21 60"/><path d="M42 68 L21 71"/><path d="M78 64 L99 60"/><path d="M78 68 L99 71"/></g>' +
+      /* little red bow on the ear */
+      '<g transform="translate(88 22)"><path d="M0 0 L-10 -7 L-10 7 Z" fill="#d6123b"/><path d="M0 0 L10 -7 L10 7 Z" fill="#d6123b"/><circle r="3.4" fill="#a30d2d"/></g>' +
+      '</svg>';
+  }
+
+  /* coquette bow (decoration on cards) */
+  var BOW_SVG =
+    '<path d="M46 31 L33 55 L47 48 Z" fill="#a30d2d"/><path d="M54 31 L67 55 L53 48 Z" fill="#a30d2d"/>' +
+    '<path d="M50 28 C30 2 4 4 6 28 C8 52 30 54 50 28 Z" fill="#d6123b"/>' +
+    '<path d="M50 28 C70 2 96 4 94 28 C92 52 70 54 50 28 Z" fill="#d6123b"/>' +
+    '<path d="M20 20 C26 14 34 16 40 24" fill="none" stroke="#ff7a96" stroke-width="2.4" stroke-linecap="round"/>' +
+    '<path d="M80 20 C74 14 66 16 60 24" fill="none" stroke="#ff7a96" stroke-width="2.4" stroke-linecap="round"/>' +
+    '<ellipse cx="50" cy="28" rx="8" ry="9.5" fill="#a30d2d"/>';
+  Array.prototype.forEach.call(document.querySelectorAll('svg.bow'), function (el) { el.innerHTML = BOW_SVG; });
+
+  /* ---------- floating background hearts ---------- */
+  (function buildHearts() {
+    var host = $('hearts');
+    var glyphs = ['♥', '♡', '✦', '♥', '✿', '♡', '❀'];
+    var colors = ['#ff7a9c', '#d6123b', '#ff9db9', '#ffb6c9', '#e8325a'];
+    for (var i = 0; i < 14; i++) {
+      var s = document.createElement('span');
+      s.textContent = glyphs[i % glyphs.length];
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.fontSize = (14 + Math.random() * 22) + 'px';
+      s.style.color = pick(colors);
+      s.style.animationDuration = (13 + Math.random() * 14) + 's';
+      s.style.animationDelay = (-Math.random() * 22) + 's';
+      s.style.setProperty('--sway', (Math.random() * 80 - 40) + 'px');
+      host.appendChild(s);
+    }
+  })();
+
+  /* ---------- optional little sound effects (off by default) ---------- */
+  var Sound = {
+    ctx: null, on: false,
+    init: function () {
+      try {
+        if (!this.ctx) {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) this.ctx = new AC();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      } catch (e) {}
+    },
+    tone: function (freq, start, dur, type, vol, slideTo) {
+      try {
+        var c = this.ctx, t = c.currentTime + start;
+        var o = c.createOscillator(), g = c.createGain();
+        o.type = type || 'sine';
+        o.frequency.setValueAtTime(freq, t);
+        if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+        g.gain.setValueAtTime(vol || 0.1, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(g); g.connect(c.destination);
+        o.start(t); o.stop(t + dur + 0.02);
+      } catch (e) {}
+    },
+    play: function (name) {
+      if (!this.on || !this.ctx) return;
+      var self = this;
+      switch (name) {
+        case 'boing': this.tone(300, 0, 0.18, 'sine', 0.16, 760); break;
+        case 'taunt': this.tone(520, 0, 0.12, 'triangle', 0.1, 800); this.tone(800, 0.11, 0.16, 'triangle', 0.1, 480); break;
+        case 'tired': this.tone(420, 0, 0.25, 'triangle', 0.1, 220); break;
+        case 'caught': this.tone(600, 0, 0.12, 'square', 0.05, 400); this.tone(400, 0.12, 0.25, 'triangle', 0.1, 200); break;
+        case 'tada': [523, 659, 784, 1047].forEach(function (f, i) { self.tone(f, i * 0.12, 0.3, 'triangle', 0.1); }); break;
+        case 'nope': this.tone(240, 0, 0.2, 'square', 0.06, 140); break;
+        case 'unlock': [784, 988, 1319].forEach(function (f, i) { self.tone(f, i * 0.11, 0.28, 'sine', 0.12); }); break;
+        case 'pop': this.tone(900, 0, 0.07, 'sine', 0.07, 1300); break;
+      }
+    }
+  };
+  var soundBtn = $('sound-btn');
+  soundBtn.addEventListener('click', function () {
+    Sound.on = !Sound.on;
+    if (Sound.on) { Sound.init(); Sound.play('pop'); }
+    soundBtn.textContent = Sound.on ? '🔊' : '🔇';
+    soundBtn.setAttribute('aria-pressed', String(Sound.on));
+    soundBtn.setAttribute('aria-label', Sound.on ? 'Turn sound off' : 'Turn sound on');
+  });
+
+  /* ---------- sparkles & falling hearts ---------- */
+  var SPARKS = ['♥', '♡', '✦', '✧', '✿', '❀'];
+  var SPARK_COLORS = ['#d6123b', '#ff4d6d', '#ff7a9c', '#ff9db9', '#e8325a'];
+
+  function burst(x, y, n, far) {
+    if (REDUCE) return;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.textContent = pick(SPARKS);
+      s.style.left = x + 'px';
+      s.style.top = y + 'px';
+      s.style.fontSize = (12 + Math.random() * 16) + 'px';
+      s.style.color = pick(SPARK_COLORS);
+      document.body.appendChild(s);
+      if (typeof s.animate !== 'function') { s.remove(); continue; }
+      var ang = Math.random() * Math.PI * 2;
+      var dist = 36 + Math.random() * (far || 60);
+      var dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist - 18;
+      var rot = (Math.random() * 120 - 60).toFixed(0);
+      var a = s.animate([
+        { transform: 'translate(-50%,-50%) scale(.4)', opacity: 1 },
+        { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(1.1) rotate(' + rot + 'deg)', opacity: 0 }
+      ], { duration: 650 + Math.random() * 400, easing: 'cubic-bezier(.2,.8,.3,1)' });
+      a.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+    }
+  }
+
+  function rain(n) {
+    if (REDUCE) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.textContent = pick(SPARKS);
+      s.style.left = (Math.random() * w) + 'px';
+      s.style.top = '-30px';
+      s.style.fontSize = (14 + Math.random() * 20) + 'px';
+      s.style.color = pick(SPARK_COLORS);
+      document.body.appendChild(s);
+      if (typeof s.animate !== 'function') { s.remove(); continue; }
+      var sway = Math.random() * 120 - 60;
+      var a = s.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + sway + 'px,' + (h + 60) + 'px) rotate(' + (Math.random() * 360 - 180).toFixed(0) + 'deg)', opacity: .9 }
+      ], { duration: 2200 + Math.random() * 2200, delay: Math.random() * 900, easing: 'ease-in', fill: 'backwards' });
+      a.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+    }
+  }
+
+  function playCurtain() {
+    if (REDUCE) return;
+    var l = $('curtain-l'), r = $('curtain-r');
+    if (typeof l.animate !== 'function') return;
+    [[l, -101], [r, 101]].forEach(function (pair) {
+      var el = pair[0];
+      el.style.display = 'block';
+      var a = el.animate([
+        { transform: 'translateX(0)', opacity: 0, offset: 0 },
+        { transform: 'translateX(0)', opacity: 1, offset: 0.12 },
+        { transform: 'translateX(0)', opacity: 1, offset: 0.34 },
+        { transform: 'translateX(' + pair[1] + '%)', opacity: 1, offset: 1 }
+      ], { duration: 1700, easing: 'ease-in-out', fill: 'forwards' });
+      a.onfinish = function () { el.style.display = 'none'; };
+    });
+  }
+
+  /* ---------- screen navigation ---------- */
+  var SCREENS = { game: $('s-game'), bday: $('s-bday'), pass: $('s-pass'), invite: $('s-invite') };
+  var currentScreen = 'game';
+
+  function go(name) {
+    if (!SCREENS[name]) return;
+    Object.keys(SCREENS).forEach(function (k) {
+      var on = (k === name);
+      SCREENS[k].classList.toggle('active', on);
+      SCREENS[k].setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    SCREENS[name].scrollTop = 0;
+    currentScreen = name;
+
+    if (name === 'bday') {
+      playCurtain();
+      rain(24);
+      Sound.play('tada');
+      var wish = $('wish');
+      wish.classList.remove('in');
+      void wish.offsetWidth;
+      wish.classList.add('in');
+    }
+    if (name === 'game') { placeWinston(true); }
+  }
+
+  /* =========================================================
+     GAME — Catch Winston
+     ========================================================= */
+  var arena = $('arena');
+  var winston = $('winston');
+  var winInner = $('winston-inner');
+  var bubble = $('bubble');
+  var counterEl = $('counter');
+  var caughtBox = $('caught-box');
+
+  var game = { escapes: 0, tired: false, caught: false, lastTaunt: '' };
+  var pos = { x: 0, y: 0 };
+
+  function setMood(mood) { winInner.innerHTML = winstonSVG(mood); }
+  function applyPos() { winston.style.transform = 'translate(' + Math.round(pos.x) + 'px,' + Math.round(pos.y) + 'px)'; }
+
+  function bounds() {
+    return {
+      maxX: Math.max(0, arena.clientWidth - winston.offsetWidth),
+      maxY: Math.max(0, arena.clientHeight - winston.offsetHeight)
+    };
+  }
+
+  /* put Winston in the middle of the arena (center = true) or keep him inside after a resize */
+  function placeWinston(center) {
+    var b = bounds();
+    if (center) { pos.x = b.maxX / 2; pos.y = b.maxY / 2; }
+    else { pos.x = Math.min(Math.max(0, pos.x), b.maxX); pos.y = Math.min(Math.max(0, pos.y), b.maxY); }
+    var prev = winston.style.transition;
+    winston.style.transition = 'none';
+    applyPos();
+    void winston.offsetWidth;
+    winston.style.transition = prev;
+  }
+
+  /* jump to a random spot, always inside the arena and far enough from the old spot */
+  function moveWinston() {
+    var b = bounds(), nx, ny, tries = 0;
+    var minDist = Math.min(b.maxX, b.maxY) * 0.45;
+    do {
+      nx = Math.random() * b.maxX;
+      ny = Math.random() * b.maxY;
+      tries++;
+    } while (tries < 14 && Math.hypot(nx - pos.x, ny - pos.y) < minDist);
+    pos.x = nx; pos.y = ny;
+    applyPos();
+  }
+
+  function wiggle() {
+    winInner.classList.remove('run');
+    void winInner.offsetWidth;
+    winInner.classList.add('run');
+  }
+  winInner.addEventListener('animationend', function (e) {
+    if (e.animationName === 'dash') winInner.classList.remove('run');
+  });
+
+  function say(text) {
+    bubble.textContent = text;
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+
+  function randomTaunt() {
+    var list = CONFIG.winstonTaunts, t, tries = 0;
+    do { t = pick(list); tries++; } while (t === game.lastTaunt && list.length > 1 && tries < 8);
+    game.lastTaunt = t;
+    return t.replace(/\{NAME\}/g, NAME_UP);
+  }
+
+  function escapeWinston() {
+    var r = winston.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 7, 60);
+
+    game.escapes++;
+    counterEl.textContent = 'Escape attempts: ' + game.escapes;
+    wiggle();
+
+    if (game.escapes >= CONFIG.escapesBeforeTired) {
+      /* he's exhausted: slower now, and the next touch catches him */
+      game.tired = true;
+      winston.classList.add('tired');
+      setMood('tired');
+      say(CONFIG.winstonTiredLine);
+      Sound.play('tired');
+    } else {
+      Sound.play(game.escapes % 2 === 1 ? 'taunt' : 'boing');
+      if (game.escapes % 2 === 1) say(randomTaunt());
+    }
+    moveWinston();
+  }
+
+  function catchWinston() {
+    game.caught = true;
+    winInner.classList.remove('run');
+    winston.classList.remove('tired');
+    winston.classList.add('surrender');
+    winston.setAttribute('aria-label', 'Winston gave up');
+    setMood('caught');
+    bubble.hidden = true;
+    caughtBox.hidden = false;
+    var r = winston.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 16, 90);
+    rain(10);
+    Sound.play('caught');
+  }
+
+  function onWinstonHit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (game.caught) return;
+    if (game.tired) { catchWinston(); return; }   /* tired = one touch is enough */
+    escapeWinston();
+  }
+
+  /* pointer events work for finger AND mouse */
+  winston.addEventListener('pointerdown', onWinstonHit);
+  /* keyboard (Enter / Space) fires a click with detail 0 */
+  winston.addEventListener('click', function (e) { if (e.detail === 0) onWinstonHit(e); });
+  window.addEventListener('resize', function () { placeWinston(false); });
+
+  $('btn-claim').addEventListener('click', function () { go('bday'); });
+
+  function resetGame() {
+    game.escapes = 0; game.tired = false; game.caught = false; game.lastTaunt = '';
+    winston.classList.remove('tired', 'surrender');
+    winston.setAttribute('aria-label', 'Winston the tuxedo cat. Try to catch him!');
+    setMood('smug');
+    counterEl.textContent = 'Escape attempts: 0';
+    bubble.hidden = false;
+    bubble.textContent = CONFIG.winstonIntro;
+    caughtBox.hidden = true;
+  }
+
+  /* =========================================================
+     PAGE 2 — Birthday
+     ========================================================= */
+  (function buildBirthday() {
+    var wish = $('wish');
+    CONFIG.birthdayParagraphs.forEach(function (txt, i) {
+      var p = document.createElement('p');
+      p.textContent = txt;
+      p.style.setProperty('--i', i);
+      wish.appendChild(p);
+    });
+    $('w-bday').innerHTML = winstonSVG('smug');
+    $('btn-more').addEventListener('click', function () { Sound.play('pop'); go('pass'); });
+  })();
+
+  /* =========================================================
+     MUSIC — vinyl record + song
+     ========================================================= */
+  var song = $('song');
+  var vinylWrap = $('vinyl-wrap'), disc = $('disc'), arm = $('arm');
+  var btnMusic = $('btn-music'), songWarn = $('song-warn');
+  var songBroken = false;
+
+  song.src = CONFIG.songFile;
+  song.volume = 0.85;
+
+  function setVinyl(playing) {
+    disc.classList.toggle('spin', playing);
+    arm.classList.toggle('on', playing);
+    vinylWrap.classList.toggle('playing', playing);
+    btnMusic.textContent = playing ? '⏸ PAUSE' : '▶ PLAY';
+  }
+  song.addEventListener('play', function () { setVinyl(true); });
+  song.addEventListener('pause', function () { setVinyl(false); });
+  song.addEventListener('error', function () {
+    songBroken = true;
+    setVinyl(false);
+    songWarn.textContent = 'Song not found. Upload a file named "' + CONFIG.songFile + '" next to index.html, then refresh.';
+    songWarn.hidden = false;
+  });
+
+  function startSong() {
+    if (songBroken) return;
+    try {
+      var p = song.play();
+      if (p && typeof p.catch === 'function') p.catch(function () { setVinyl(false); });
+    } catch (e) {}
+  }
+  function stopSong() {
+    try { song.pause(); song.currentTime = 0; } catch (e) {}
+  }
+  btnMusic.addEventListener('click', function () {
+    if (song.paused) startSong(); else song.pause();
+  });
+  setVinyl(false);
+
+  /* =========================================================
+     PAGE 3 — Password gate
+     ========================================================= */
+  var pwForm = $('pw-form'), pwInput = $('pw-input'), pwMsg = $('pw-msg'), pwHint = $('pw-hint');
+  var pwCard = $('pass-card'), lock = $('lock'), btnUnlock = $('btn-unlock');
+  var wrongTries = 0, unlocking = false;
+
+  function norm(s) { return String(s).trim().toLowerCase(); }
+
+  pwForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (unlocking) return;
+    var typed = norm(pwInput.value);
+
+    if (!typed) {
+      pwMsg.className = 'msg bad';
+      pwMsg.textContent = 'Type the secret first, silly 💌';
+      return;
+    }
+
+    if (typed === norm(CONFIG.password)) {
+      unlocking = true;
+      pwInput.disabled = true; btnUnlock.disabled = true;
+      pwMsg.className = 'msg good';
+      pwMsg.textContent = 'Unlocked! ♡';
+      lock.textContent = '🔓';
+      lock.classList.add('open');
+      Sound.play('unlock');
+      startSong();   /* this tap counts as the "user gesture" browsers need to allow music */
+      var r = lock.getBoundingClientRect();
+      burst(r.left + r.width / 2, r.top + r.height / 2, 14, 90);
+      setTimeout(function () { go('invite'); }, REDUCE ? 400 : 1200);
+    } else {
+      wrongTries++;
+      pwMsg.className = 'msg bad';
+      pwMsg.textContent = CONFIG.wrongPasswordMessage;
+      pwCard.classList.remove('shake'); void pwCard.offsetWidth; pwCard.classList.add('shake');
+      Sound.play('nope');
+      pwInput.value = '';
+      pwInput.focus();
+      if (wrongTries >= 2 && CONFIG.passwordHint) {
+        pwHint.textContent = CONFIG.passwordHint;
+        pwHint.hidden = false;
+      }
+    }
+  });
+  pwCard.addEventListener('animationend', function (e) { if (e.animationName === 'shake') pwCard.classList.remove('shake'); });
+
+  function resetPassword() {
+    unlocking = false; wrongTries = 0;
+    pwInput.disabled = false; btnUnlock.disabled = false; pwInput.value = '';
+    pwMsg.className = 'msg'; pwMsg.textContent = '';
+    pwHint.hidden = true;
+    lock.textContent = '🔒'; lock.classList.remove('open');
+  }
+
+  /* =========================================================
+     PAGE 4 — Digital invitation
+     ========================================================= */
+  var env = $('env'), envStage = $('env-stage'), inviteCard = $('invite-card');
+
+  /* fill the card with the text from CONFIG */
+  $('inv-eyebrow').textContent = CONFIG.inviteEyebrow;
+  $('inv-title').textContent = CONFIG.inviteTitle;
+  $('inv-text').textContent = CONFIG.inviteText;
+  $('song-title').textContent = CONFIG.songTitle;
+  $('count-label').textContent = CONFIG.countdownLabel;
+  $('rsvp-q').textContent = CONFIG.rsvpQuestion;
+  $('btn-yes').textContent = CONFIG.rsvpYes;
+  $('btn-no').textContent = CONFIG.rsvpNo;
+  $('closing-text').textContent = CONFIG.closingMessage;
+  $('w-final').innerHTML = winstonSVG('sleepy');
+
+  (function buildDetails() {
+    var host = $('inv-details');
+    CONFIG.inviteDetails.forEach(function (d) {
+      var box = document.createElement('div');
+      box.className = 'detail' + (d.full ? ' full' : '');
+      var small = document.createElement('small'); small.textContent = d.label;
+      var b = document.createElement('b'); b.textContent = d.value;
+      box.appendChild(small); box.appendChild(b);
+      host.appendChild(box);
+    });
+  })();
+
+  /* open the envelope */
+  var envOpened = false;
+  function openEnvelope() {
+    if (envOpened) return;
+    envOpened = true;
+    env.classList.add('open');
+    Sound.play('unlock');
+    var r = env.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 14, 100);
+    setTimeout(function () { envStage.classList.add('gone'); }, REDUCE ? 50 : 750);
+    setTimeout(function () {
+      envStage.hidden = true;
+      inviteCard.hidden = false;
+      SCREENS.invite.scrollTop = 0;
+      rain(18);
+      Sound.play('tada');
+    }, REDUCE ? 150 : 1300);
+  }
+  env.addEventListener('click', openEnvelope);
+  env.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date(CONFIG.eventDate).getTime();
+  var cEls = { d: $('c-d'), h: $('c-h'), m: $('c-m'), s: $('c-s') };
+  var lastVals = { d: null, h: null, m: null, s: null };
+
+  function setCount(key, val) {
+    var txt = String(val);
+    if (lastVals[key] !== txt) {
+      cEls[key].textContent = txt;
+      cEls[key].classList.remove('tick'); void cEls[key].offsetWidth; cEls[key].classList.add('tick');
+      lastVals[key] = txt;
+    }
+  }
+  function updateCountdown() {
+    var diff = target - Date.now();
+    if (isNaN(diff)) return;
+    if (diff <= 0) {
+      $('count').hidden = true;
+      $('count-label').hidden = true;
+      var done = $('count-done');
+      done.textContent = CONFIG.countdownDone;
+      done.hidden = false;
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    setCount('d', Math.floor(s / 86400));
+    setCount('h', Math.floor((s % 86400) / 3600));
+    setCount('m', Math.floor((s % 3600) / 60));
+    setCount('s', s % 60);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ---------- RSVP ---------- */
+  var btnYes = $('btn-yes'), btnNo = $('btn-no'), rsvp = $('rsvp'), closing = $('closing');
+  var dodges = 0, gaveIn = false;
+
+  function sayYes() {
+    rsvp.hidden = true;
+    closing.hidden = false;
+    var r = btnYes.getBoundingClientRect();
+    burst(window.innerWidth / 2, Math.max(80, r.top), 18, 110);
+    rain(36);
+    Sound.play('tada');
+    setTimeout(function () {
+      if (closing.scrollIntoView) closing.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'center' });
+    }, 120);
+  }
+  btnYes.addEventListener('click', sayYes);
+
+  function dodgeNo(e) {
+    if (gaveIn) return;                 /* after giving in, a normal click = yes */
+    if (e && e.preventDefault) e.preventDefault();
+    dodges++;
+    if (dodges >= CONFIG.rsvpNoDodges) {
+      gaveIn = true;
+      btnNo.style.transform = 'none';
+      btnNo.textContent = CONFIG.rsvpNoGivesIn;
+      btnNo.classList.remove('ghost');
+      btnNo.classList.add('pulse');
+      Sound.play('pop');
+      return;
+    }
+    var dx = (Math.random() * 2 - 1) * 90;
+    var dy = (Math.random() * 2 - 1) * 46;
+    btnNo.style.transform = 'translate(' + Math.round(dx) + 'px,' + Math.round(dy) + 'px) rotate(' + Math.round(Math.random() * 14 - 7) + 'deg)';
+    btnNo.textContent = CONFIG.rsvpNoDodgeLines[(dodges - 1) % CONFIG.rsvpNoDodgeLines.length];
+    Sound.play('boing');
+    var rr = btnNo.getBoundingClientRect();
+    burst(rr.left + rr.width / 2, rr.top + rr.height / 2, 5, 40);
+  }
+  btnNo.addEventListener('pointerdown', dodgeNo);
+  btnNo.addEventListener('click', function (e) {
+    if (gaveIn) { sayYes(); return; }
+    if (e.detail === 0) dodgeNo(e);     /* keyboard */
+  });
+
+  /* play again */
+  $('btn-restart').addEventListener('click', function () {
+    resetGame();
+    resetPassword();
+    stopSong();
+    /* reset invitation */
+    envOpened = false;
+    env.classList.remove('open');
+    envStage.classList.remove('gone');
+    envStage.hidden = false;
+    inviteCard.hidden = true;
+    closing.hidden = true;
+    rsvp.hidden = false;
+    dodges = 0; gaveIn = false;
+    btnNo.style.transform = 'none';
+    btnNo.textContent = CONFIG.rsvpNo;
+    btnNo.classList.add('ghost');
+    btnNo.classList.remove('pulse');
+    go('game');
+  });
+
+  /* =========================================================
+     START
+     ========================================================= */
+  resetGame();
+  placeWinston(true);
+  Object.keys(SCREENS).forEach(function (k) { SCREENS[k].setAttribute('aria-hidden', k === 'game' ? 'false' : 'true'); });
+  /* layout can shift once fonts load, so re-center Winston */
+  window.addEventListener('load', function () { if (currentScreen === 'game' && game.escapes === 0) placeWinston(true); });
+})();
+</script>
+</body>
+</html>
