@@ -530,7 +530,7 @@ h2{font-size:clamp(24px,6.6vw,34px)}
     <div class="card wide bakery-card" id="bakery-card">
       <p class="eyebrow">Winston's little bakery ♡</p>
       <h2 id="cake-title">Let's bake Hezzie a cake! 🎂</h2>
-      <p class="sub" id="cake-instructions">Since we can't go on a dinner date, let's make him something sweet.</p>
+      <p class="sub" id="cake-instructions"></p>
       <div class="bakery-stage" id="cake-stage">
         <div class="ingredient-row" id="ingredient-row">
           <button class="ingredient" type="button" data-ingredient="flour"><span>🌾</span>Flour</button>
@@ -1359,7 +1359,7 @@ const CONFIG = {
     cakeIngredients = [];
     cakeDecorations = [];
     $('cake-title').textContent = "Let's bake Hezzie a cake! 🎂";
-    $('cake-instructions').textContent = "Since we can't go on a dinner date, let's make him something sweet.";
+    $('cake-instructions').textContent = '';
     ingredientRow.hidden = false;
     ingredientRow.querySelectorAll('[data-ingredient]').forEach(function (b) {
       b.disabled = false; b.classList.remove('selected');
@@ -1410,15 +1410,15 @@ const CONFIG = {
         cakeAction.disabled = false; cakeAction.textContent = 'Finish the cake ♡';
       }, REDUCE ? 100 : 1500);
     } else if (cakeStep === 'decorate') {
-      cakeStep = 'finished'; $('cake-title').textContent = 'A little cake, made with love ♡';
-      $('cake-instructions').textContent = 'Your birthday surprise for Hezzie is ready!';
+      cakeStep = 'finished'; $('cake-title').textContent = 'Made with love';
+      $('cake-instructions').textContent = 'Your cake will arrive within a bit!';
       cakeArt.textContent = '🎂' + (cakeDecorations.length ? ' ' + cakeDecorations.join(' ') : ' 💗');
       cakeArt.classList.remove('finished-cake');
       void cakeArt.offsetWidth;
       cakeArt.classList.add('finished-cake');
       $('cake-stage').classList.add('celebrating');
       decorRow.hidden = true; cakeProgress.textContent = 'Cake complete! 🎉'; cakeAction.hidden = true;
-      cakeMessage.textContent = "i might be not there, but i hope my love will still reach you through this. i love you";
+      cakeMessage.textContent = "I might not be here today, but at least my love will reach you there through this. Happy birthday, sayang. I love you always.";
       cakeMessage.hidden = false; cakeNote.textContent = 'A little cake, carrying a whole lot of love. ♡';
       Sound.play('tada'); rain(24); backWinston.hidden = false;
     }
