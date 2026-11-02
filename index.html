@@ -387,9 +387,22 @@ h2{font-size:clamp(24px,6.6vw,34px)}
 .ingredient.selected,.decor-btn.selected{background:#ffe0ea;border-color:var(--red);box-shadow:0 2px 0 var(--red)}
 .ingredient:disabled{opacity:.7;cursor:default}
 .bowl,.bake-oven{font-size:64px;line-height:1.1}
-.cake-art{font-size:78px;line-height:1.2;animation:popIn .5s ease}
+.bake-oven{animation:ovenWarm 1s ease-in-out infinite alternate}
+.cake-art{font-size:78px;line-height:1.2;display:inline-block;transform-origin:50% 80%;animation:cakeRise .75s cubic-bezier(.2,.8,.2,1) both,cakeWiggle 2.4s ease-in-out .75s infinite}
+.cake-art.finished-cake{animation:cakeCelebrate .8s ease-out both,cakeWiggle 2.4s ease-in-out .8s infinite}
+.cake-message{line-height:1.7;animation:messageFadeIn 1s ease both;padding:8px 4px}
+.bakery-stage.celebrating{background:linear-gradient(135deg,#fff0f5,#ffe0eb,#fff8fa);animation:stageGlow 2s ease-in-out infinite alternate}
+.ingredient.selected{animation:ingredientPop .28s ease-out}
+.decor-btn.selected{animation:ingredientPop .28s ease-out}
 .bowl.mix{animation:mixBowl .65s ease-in-out 3}
 @keyframes mixBowl{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg) scale(1.04)}75%{transform:rotate(12deg) scale(1.04)}}
+@keyframes cakeRise{0%{opacity:0;transform:translateY(24px) scale(.45) rotate(-12deg)}65%{opacity:1;transform:translateY(-8px) scale(1.12) rotate(5deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes cakeWiggle{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes cakeCelebrate{0%{transform:scale(.35) rotate(-18deg)}55%{transform:scale(1.22) rotate(8deg)}75%{transform:scale(.94) rotate(-4deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes ovenWarm{from{transform:scale(1);filter:drop-shadow(0 0 0 #ffb0c5)}to{transform:scale(1.08);filter:drop-shadow(0 0 14px #ff9fba)}}
+@keyframes ingredientPop{0%{transform:scale(.9)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes messageFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes stageGlow{from{box-shadow:inset 0 0 12px rgba(255,157,185,.2)}to{box-shadow:inset 0 0 32px rgba(255,90,140,.4)}}
 .decor-btn{font:inherit;font-weight:700;border:2px solid var(--pink-300);border-radius:999px;padding:8px 12px;background:#fff;color:var(--red-dark);cursor:pointer}
 .bakery-progress{font-weight:700;color:var(--red-dark);margin:0;min-height:1.5em}
 .cake-message{font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;color:var(--red);margin:0}
@@ -1400,9 +1413,13 @@ const CONFIG = {
       cakeStep = 'finished'; $('cake-title').textContent = 'A little cake, made with love ♡';
       $('cake-instructions').textContent = 'Your birthday surprise for Hezzie is ready!';
       cakeArt.textContent = '🎂' + (cakeDecorations.length ? ' ' + cakeDecorations.join(' ') : ' 💗');
+      cakeArt.classList.remove('finished-cake');
+      void cakeArt.offsetWidth;
+      cakeArt.classList.add('finished-cake');
+      $('cake-stage').classList.add('celebrating');
       decorRow.hidden = true; cakeProgress.textContent = 'Cake complete! 🎉'; cakeAction.hidden = true;
-      cakeMessage.textContent = "I couldn't take you out for dinner, so I made you something sweeter. Happy Birthday, my favorite person. This cake is made with all my love. 🎂❤️";
-      cakeMessage.hidden = false; cakeNote.textContent = 'Delivery complete! One birthday cake, baked with all my love.';
+      cakeMessage.textContent = "i might be not there, but i hope my love will still reach you through this. i love you";
+      cakeMessage.hidden = false; cakeNote.textContent = 'A little cake, carrying a whole lot of love. ♡';
       Sound.play('tada'); rain(24); backWinston.hidden = false;
     }
   });
