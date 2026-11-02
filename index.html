@@ -378,6 +378,22 @@ h2{font-size:clamp(24px,6.6vw,34px)}
 .curtain.l{left:0;border-right:6px solid var(--red)}
 .curtain.r{right:0;border-left:6px solid var(--red)}
 
+/* cake-making game */
+.bakery-card{max-width:520px;gap:12px}
+.bakery-stage{width:100%;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#fff0f4;border:2px dashed var(--pink-400);border-radius:22px;padding:14px}
+.ingredient-row,.decor-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.ingredient{min-width:78px;min-height:76px;border:2px solid var(--pink-300);border-radius:16px;background:#fff;color:var(--maroon);font:inherit;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;box-shadow:0 4px 0 var(--pink-300);touch-action:manipulation}
+.ingredient span{font-size:27px;line-height:1.1}
+.ingredient.selected,.decor-btn.selected{background:#ffe0ea;border-color:var(--red);box-shadow:0 2px 0 var(--red)}
+.ingredient:disabled{opacity:.7;cursor:default}
+.bowl,.bake-oven{font-size:64px;line-height:1.1}
+.cake-art{font-size:78px;line-height:1.2;animation:popIn .5s ease}
+.bowl.mix{animation:mixBowl .65s ease-in-out 3}
+@keyframes mixBowl{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg) scale(1.04)}75%{transform:rotate(12deg) scale(1.04)}}
+.decor-btn{font:inherit;font-weight:700;border:2px solid var(--pink-300);border-radius:999px;padding:8px 12px;background:#fff;color:var(--red-dark);cursor:pointer}
+.bakery-progress{font-weight:700;color:var(--red-dark);margin:0;min-height:1.5em}
+.cake-message{font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;color:var(--red);margin:0}
+
 /* small phones */
 @media (max-width:380px){
   body{font-size:16px}
@@ -497,8 +513,36 @@ h2{font-size:clamp(24px,6.6vw,34px)}
 <section class="screen" id="s-invite" aria-label="Invitation">
   <div class="wrap">
 
+    <!-- cake-making game replaces the invitation -->
+    <div class="card wide bakery-card" id="bakery-card">
+      <p class="eyebrow">Winston's little bakery ♡</p>
+      <h2 id="cake-title">Let's bake Hezzie a cake! 🎂</h2>
+      <p class="sub" id="cake-instructions">Since we can't go on a dinner date, let's make him something sweet.</p>
+      <div class="bakery-stage" id="cake-stage">
+        <div class="ingredient-row" id="ingredient-row">
+          <button class="ingredient" type="button" data-ingredient="flour"><span>🌾</span>Flour</button>
+          <button class="ingredient" type="button" data-ingredient="eggs"><span>🥚</span>Eggs</button>
+          <button class="ingredient" type="button" data-ingredient="milk"><span>🥛</span>Milk</button>
+          <button class="ingredient" type="button" data-ingredient="sugar"><span>🍚</span>Sugar</button>
+        </div>
+        <div class="bowl" id="cake-bowl" hidden>🥣</div>
+        <div class="bake-oven" id="cake-oven" hidden>🔥</div>
+        <div class="cake-art" id="cake-art" hidden>🎂</div>
+        <p class="bakery-progress" id="cake-progress" aria-live="polite">Tap all four ingredients to collect them!</p>
+        <div class="decor-row" id="decor-row" hidden>
+          <button class="decor-btn" type="button" data-decor="🍓">🍓 Strawberries</button>
+          <button class="decor-btn" type="button" data-decor="💗">💗 Pink frosting</button>
+          <button class="decor-btn" type="button" data-decor="🕯️">🕯️ Candles</button>
+        </div>
+      </div>
+      <button class="btn" id="cake-action" type="button" disabled>Collect ingredients ♡</button>
+      <p class="cake-message" id="cake-message" hidden></p>
+      <p class="tiny" id="cake-note">Winston is supervising. He is definitely not eating the ingredients.</p>
+      <button class="btn ghost" id="btn-back-winston" type="button" hidden>Back to Winston! 🐾</button>
+    </div>
+
     <!-- step 1: the envelope -->
-    <div class="env-stage" id="env-stage">
+    <div class="env-stage" id="env-stage" hidden>
       <div class="env" id="env" role="button" tabindex="0" aria-label="Tap to open your invitation">
         <div class="env-back"></div>
         <div class="env-letter">For <span class="js-name">Hezzie</span> ♡</div>
@@ -1281,6 +1325,105 @@ const CONFIG = {
     btnNo.classList.remove('pulse');
     go('game');
   });
+
+  /* ---------- CAKE-MAKING GAME ---------- */
+  var cakeStep = 'collect';
+  var cakeIngredients = [];
+  var cakeDecorations = [];
+  var cakeAction = $('cake-action');
+  var cakeProgress = $('cake-progress');
+  var cakeBowl = $('cake-bowl');
+  var cakeOven = $('cake-oven');
+  var cakeArt = $('cake-art');
+  var ingredientRow = $('ingredient-row');
+  var decorRow = $('decor-row');
+  var cakeMessage = $('cake-message');
+  var cakeNote = $('cake-note');
+  var backWinston = $('btn-back-winston');
+
+  function resetCakeGame() {
+    cakeStep = 'collect';
+    cakeIngredients = [];
+    cakeDecorations = [];
+    $('cake-title').textContent = "Let's bake Hezzie a cake! 🎂";
+    $('cake-instructions').textContent = "Since we can't go on a dinner date, let's make him something sweet.";
+    ingredientRow.hidden = false;
+    ingredientRow.querySelectorAll('[data-ingredient]').forEach(function (b) {
+      b.disabled = false; b.classList.remove('selected');
+    });
+    cakeBowl.hidden = true; cakeBowl.classList.remove('mix');
+    cakeOven.hidden = true; cakeArt.hidden = true; cakeArt.textContent = '🎂';
+    decorRow.hidden = true;
+    decorRow.querySelectorAll('[data-decor]').forEach(function (b) { b.classList.remove('selected'); });
+    cakeProgress.textContent = 'Tap all four ingredients to collect them!';
+    cakeAction.textContent = 'Collect ingredients ♡'; cakeAction.disabled = true; cakeAction.hidden = false;
+    cakeMessage.hidden = true; cakeNote.hidden = false;
+    cakeNote.textContent = 'Winston is supervising. He is definitely not eating the ingredients.';
+    backWinston.hidden = true;
+  }
+
+  ingredientRow.querySelectorAll('[data-ingredient]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (cakeStep !== 'collect' || b.disabled) return;
+      cakeIngredients.push(b.getAttribute('data-ingredient'));
+      b.disabled = true; b.classList.add('selected'); Sound.play('pop');
+      cakeProgress.textContent = cakeIngredients.length + ' of 4 ingredients collected!';
+      if (cakeIngredients.length === 4) {
+        cakeProgress.textContent = 'Perfect! All ingredients are ready.';
+        cakeAction.disabled = false; cakeAction.textContent = 'Mix the batter! 🥣';
+      }
+    });
+  });
+
+  cakeAction.addEventListener('click', function () {
+    if (cakeStep === 'collect') {
+      cakeStep = 'mix'; ingredientRow.hidden = true; cakeBowl.hidden = false; cakeBowl.classList.add('mix');
+      cakeProgress.textContent = 'Mix, mix, mix! Winston says: more sprinkles!';
+      cakeAction.disabled = true; cakeAction.textContent = 'Mixing...'; Sound.play('boing');
+      setTimeout(function () {
+        if (cakeStep !== 'mix') return;
+        cakeBowl.classList.remove('mix'); cakeStep = 'bake';
+        cakeProgress.textContent = 'Batter is ready! Time to bake it.';
+        cakeAction.disabled = false; cakeAction.textContent = 'Put it in the oven! 🔥';
+      }, REDUCE ? 100 : 1500);
+    } else if (cakeStep === 'bake') {
+      cakeStep = 'decorate'; cakeBowl.hidden = true; cakeOven.hidden = false;
+      cakeProgress.textContent = 'Bake, bake, bake... ding! Your cake is ready.';
+      cakeAction.disabled = true; cakeAction.textContent = 'Baking...'; Sound.play('unlock');
+      setTimeout(function () {
+        if (cakeStep !== 'decorate') return;
+        cakeOven.hidden = true; cakeArt.hidden = false; decorRow.hidden = false;
+        cakeProgress.textContent = 'Choose your cake decorations!';
+        cakeAction.disabled = false; cakeAction.textContent = 'Finish the cake ♡';
+      }, REDUCE ? 100 : 1500);
+    } else if (cakeStep === 'decorate') {
+      cakeStep = 'finished'; $('cake-title').textContent = 'A little cake, made with love ♡';
+      $('cake-instructions').textContent = 'Your birthday surprise for Hezzie is ready!';
+      cakeArt.textContent = '🎂' + (cakeDecorations.length ? ' ' + cakeDecorations.join(' ') : ' 💗');
+      decorRow.hidden = true; cakeProgress.textContent = 'Cake complete! 🎉'; cakeAction.hidden = true;
+      cakeMessage.textContent = "I couldn't take you out for dinner, so I made you something sweeter. Happy Birthday, my favorite person. This cake is made with all my love. 🎂❤️";
+      cakeMessage.hidden = false; cakeNote.textContent = 'Delivery complete! One birthday cake, baked with all my love.';
+      Sound.play('tada'); rain(24); backWinston.hidden = false;
+    }
+  });
+
+  decorRow.querySelectorAll('[data-decor]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (cakeStep !== 'decorate') return;
+      var d = b.getAttribute('data-decor');
+      if (b.classList.contains('selected')) {
+        b.classList.remove('selected');
+        cakeDecorations = cakeDecorations.filter(function (x) { return x !== d; });
+      } else { b.classList.add('selected'); cakeDecorations.push(d); }
+      cakeArt.textContent = '🎂' + (cakeDecorations.length ? ' ' + cakeDecorations.join(' ') : '');
+      Sound.play('pop');
+    });
+  });
+
+  backWinston.addEventListener('click', function () {
+    resetCakeGame(); resetGame(); resetPassword(); stopSong(); go('game');
+  });
+  resetCakeGame();
 
   /* =========================================================
      START
